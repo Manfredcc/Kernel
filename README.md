@@ -14,6 +14,6 @@ This repository is used to do experiments of linux kernel, including but not lim
 
 ---
 
-If you have any questions, feel free to leave message or test me directly. I am looking forward to your arrival.
+If you have any questions, feel free to leave message or test me directly. I am looking forward to your arrival. As I'm an English apprenticeship, it's normal if you fell something strange while reading.：
 
 - Email:1259106665@qq.com/manfredxxc@gmail.com

@@ -1,0 +1,1 @@
+cmd_/home/ll/03_work/dev_projects/01_linux_driver_dev/Kernel/concurrency/spinlock/Module.symvers := sed 's/ko$$/o/' /home/ll/03_work/dev_projects/01_linux_driver_dev/Kernel/concurrency/spinlock/modules.order | scripts/mod/modpost -m -a  -o /home/ll/03_work/dev_projects/01_linux_driver_dev/Kernel/concurrency/spinlock/Module.symvers -e -i Module.symvers   -T -

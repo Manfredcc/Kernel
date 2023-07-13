@@ -1,0 +1,1 @@
+cmd_/home/ll/03_work/dev_projects/01_linux_driver_dev/Kernel/concurrency/spinlock/ego_spinlock.mod := printf '%s\n'   ego_spinlock.o | awk '!x[$$0]++ { print("/home/ll/03_work/dev_projects/01_linux_driver_dev/Kernel/concurrency/spinlock/"$$0) }' > /home/ll/03_work/dev_projects/01_linux_driver_dev/Kernel/concurrency/spinlock/ego_spinlock.mod

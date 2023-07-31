@@ -76,6 +76,16 @@ static struct attribute demo_2 = {
     .mode = 0664,
 };
 
+static struct attribute self = {
+    .name = "self",
+    .mode = 0664,
+};
+
+struct attribute *self_attr[] = {
+    &self,
+    NULL
+};
+
 struct attribute *attr[] = {
     &demo_1,
     &demo_2,
@@ -115,6 +125,14 @@ static int __init ego_kobject_init(void)
             ego_err(chip, "Could not register\n");
             break;
         }
+        ret = sysfs_create_files(&chip->kobj, (const struct attribute **)self_attr);
+        if (ret) {
+		    ret = -ENOMEM;
+		    break;
+	    }
+
+        sysfs_remove_files(&chip->kobj, (const struct attribute **)self_attr);
+
 
         kobject_uevent(&chip->kobj, KOBJ_CHANGE);
 

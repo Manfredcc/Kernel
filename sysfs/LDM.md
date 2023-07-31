@@ -276,7 +276,7 @@ Note that：如果想修改已经添加到系统中的`kobject`，则需要使�
 
 ![image-20230730212419152](LDM.assets/image-20230730212419152.png)
 
-uevent机制，即内核基于`kobject`通知用户空间的方式，可以传递`kobject`上发生的行为和环境变量，更多细节见**热插拔专题[^2]**
+uevent机制，即内核基于`kobject`通知用户空间的方式，**主要依托于 kset** ,可以传递`kobject`上发生的行为和环境变量，更多细节见**热插拔专题[^2]**
 
 
 
@@ -286,23 +286,44 @@ sysfs虚拟文件系统的主要作用为用户空间提供一个与设备驱动
 
 对于sysfs中的每一个目录，对应一个`kobject`，而一个`kobject`会输出一个或多个属性用于实现交互操作
 
+---
+
+前面提到过`kobject`在创建的时候，其字段`ktype`包含了该`kobject`的一系列属性，即默认属性
+
+```c
+/* 不感兴趣的字段已删除 */
+struct kobj_type {
+	const struct sysfs_ops *sysfs_ops; /* 默认操作 */
+	struct attribute **default_attrs;	/* use default_groups instead */
+	const struct attribute_group **default_groups; /* 默认属性 */
+};
+```
+
+当然也可以添加/删除自定义属性，方式是定义一个属性后，把它创建到指定的`kobj`下
+
+```c
+static inline int sysfs_create_files(struct kobject *kobj,
+				    const struct attribute * const *attr)
+    
+static inline void sysfs_remove_files(struct kobject *kobj,
+				     const struct attribute * const *attr)
+```
+
+一个小demo：[ego_kobject.c](./ego_kobject.c)
+
+后面的 bus/device/device_driver/class 都是标准`kobject`的封装实现的
+
+---
+
+**符号链接**
+
+`static inline int sysfs_create_link(struct kobject *kobj, struct kobject *target, const char *name)`
 
 
 
+**二进制属性**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+//TODO
 
 
 
